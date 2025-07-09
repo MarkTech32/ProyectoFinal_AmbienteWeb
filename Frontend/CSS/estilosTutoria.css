@@ -1,0 +1,156 @@
+/* Barra de navegación */
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-navegacion {
+    max-width: 2400px; 
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 2rem;
+}
+
+
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #764ba2;
+}
+
+.menu-navegacion {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.menu-navegacion a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-navegacion a:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.menu-navegacion a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #667eea;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.menu-navegacion a:hover::after {
+    width: 100%;
+}
+
+
+
+
+section {
+    margin-top: 130px; 
+}
+
+
+
+
+/* Estilos de la tabla */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  
+  
+}
+
+th {
+  background-color: #667eea;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+td {
+  background-color: #f9f9f9;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.button1 {background-color: #726db9;} 
+.button2 {background-color: #726db9;} 
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.button:hover {
+    background: linear-gradient(135deg, #1ecbf785, #4864e0);
+    color: white;
+    transform: translateY(-2px);
+}
+
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+
+.menu-navegacion a:hover,
+.menu-navegacion a.Pagina-Actual {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.menu-navegacion a:hover::after,
+.menu-navegacion a.Pagina-Actual::after {
+    width: 100%;
+}
