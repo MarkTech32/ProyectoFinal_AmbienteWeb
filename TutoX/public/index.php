@@ -4,29 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TutoX - Conectando Estudiantes</title>
-    <link rel="stylesheet" href="../CSS/estilosIndex.css">
+    
+    <!-- CSS base (siempre se carga) -->
+    <link rel="stylesheet" href="css/stylesComponentes.css">
+    
+    <!-- CSS específico para index -->
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     
-    <!-- Barra de navegación -->
-    <nav>
-        <div class="contenedor-navegacion">
-            <a href="index.html" class="logo">TutoX</a>
-            <ul class="menu-navegacion">
-                <li><a href="Tutorias..html">Tutorías</a></li> <!-- Aqui hay que poner el link del html de tutorias -->
-                <li><a href="#servicios">Servicios</a></li> <!-- Aqui hay que poner el link del html de servicios -->
-                <li><a href="#comunidad">Comunidad</a></li> <!-- Aqui hay que poner el link del html de comunidad -->
-                <li><a href="#perfil">Mi Perfil</a></li> <!-- Aqui hay que poner el link del html de perfil -->
-            </ul>
-        </div>
-    </nav>
+    <?php include '../app/views/componentes/navbar.php'; ?>
 
-
-
-
-
-
-    
     <!-- Sección principal -->
     <section class="seccion-principal">
         <div class="contenido-principal">
@@ -38,8 +26,6 @@
             </div>
         </div>
     </section>
-
-    
 
     <!-- Sección de características -->
     <section class="caracteristicas">
@@ -99,11 +85,6 @@
         </div>
     </section>
 
-    <!-- Pie de página -->
-    <footer>
-        <div class="contenedor">
-            <p>&copy; 2025 TutoX. Conectando estudiantes, construyendo futuros.</p>
-        </div>
-    </footer>
+    <?php include '../app/views/componentes/footer.php'; ?>
 </body>
 </html>
