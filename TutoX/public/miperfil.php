@@ -1,80 +1,106 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - TutoX</title>
 
     <!-- CSS base -->
     <link rel="stylesheet" href="css/stylesComponentes.css">
-
-    <!-- CSS específico para Mi Perfil -->
-    <link rel="stylesheet" href="css/miperfil.css">
+    <link rel="stylesheet" href="css/miperfil.css" id="css-miperfil">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+
     <!-- Navbar -->
-    <?php include '../app/views/componentes/navbar.php'; ?>
+    <?php include __DIR__ . '/../app/views/componentes/navbar.php'; ?>
 
-    <!-- Sección principal -->
-    <section class="seccion-perfil">
-        <div class="contenedor">
-            <h1>Mi Perfil</h1>
-            <p>Visualiza y gestiona tu información personal, servicios y configuración</p>
-        </div>
-    </section>
-
-    <!-- Lista de elementos del perfil -->
-    <section class="lista-perfil">
-        <div class="contenedor">
-            <div class="cuadricula-perfil">
-
-                <!-- Caja 1 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Información Personal</div>
-                    <h3>Datos Básicos</h3>
-                    <p class="descripcion">Nombre, carrera, universidad y correo del usuario.</p>
+    <div class="contenedor-login">
+        <!-- Sección de bienvenida -->
+        <div class="seccion-bienvenida">
+            <div class="contenido-bienvenida">
+                <h1>¡Bienvenido a tutoX!</h1>
+                <p>La plataforma donde estudiantes universitarios conectan para compartir conocimiento y crecer juntos.</p>
+                <div class="caracteristicas">
+                    <div class="caracteristica">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Tutorías personalizadas</span>
+                    </div>
+                    <div class="caracteristica">
+                        <i class="fas fa-users"></i>
+                        <span>Comunidad estudiantil</span>
+                    </div>
+                    <div class="caracteristica">
+                        <i class="fas fa-star"></i>
+                        <span>Servicios profesionales</span>
+                    </div>
                 </div>
-
-                <!-- Caja 2 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Áreas de Dominio</div>
-                    <h3>Especialidades</h3>
-                    <p class="descripcion">Lista de conocimientos, habilidades o temas dominados por el usuario.</p>
-                </div>
-
-                <!-- Caja 3 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Servicios</div>
-                    <h3>Servicios Activos</h3>
-                    <p class="descripcion">Servicios publicados por el usuario disponibles para otros.</p>
-                </div>
-
-                <!-- Caja 4 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Solicitudes</div>
-                    <h3>Historial de Solicitudes</h3>
-                    <p class="descripcion">Registros de servicios que se han solicitado o reservado.</p>
-                </div>
-
-                <!-- Caja 5 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Valoraciones</div>
-                    <h3>Comentarios y Puntuaciones</h3>
-                    <p class="descripcion">Opiniones de otros usuarios sobre los servicios ofrecidos.</p>
-                </div>
-
-                <!-- Caja 6 -->
-                <div class="tarjeta-perfil">
-                    <div class="categoria-tag">Configuración</div>
-                    <h3>Editar Perfil</h3>
-                    <p class="descripcion">Opciones para modificar tu información o cerrar sesión.</p>
-                </div>
-
             </div>
         </div>
-    </section>
+
+        <!-- Formulario de login -->
+        <div class="seccion-formulario">
+            <div class="contenedor-form">
+                <div class="header-form">
+                    <h2>Iniciar Sesión</h2>
+                    <p>Accede a tu cuenta para continuar</p>
+                </div>
+
+                <form class="formulario-login" action="#" method="POST">
+                    <div class="grupo-input">
+                        <label for="email">Correo electrónico</label>
+                        <div class="input-con-icono">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="tucorreo@universidad.com" required>
+                        </div>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="password">Contraseña</label>
+                        <div class="input-con-icono">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" onclick="togglePassword()">
+                                <i class="fas fa-eye" id="toggle-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="boton-login">
+                        <span>Iniciar Sesión</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="registro-link">
+                    <p>¿No tienes una cuenta? <a href="#">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
-    <?php include '../app/views/componentes/footer.php'; ?>
+    <?php include __DIR__ . '/../app/views/componentes/footer.php'; ?>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggle-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+
 </body>
 </html>
