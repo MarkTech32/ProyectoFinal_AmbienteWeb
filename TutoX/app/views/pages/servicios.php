@@ -6,15 +6,15 @@
     <title>serivcios - TutoX</title>
     
     <!-- CSS base (siempre se carga) -->
-    <link rel="stylesheet" href="css/stylesComponentes.css">
+<link rel="stylesheet" href="css/stylesComponentes.css">
     
     <!-- CSS específico para serivcios -->
-    <link rel="stylesheet" href="css/servicios.css">
+<link rel="stylesheet" href="css/servicios.css">
 </head>
 <body>
     
     <!-- Aqui agregamos el componente del navbar -->
-    <?php include '../app/views/componentes/navbar.php'; ?>
+<?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <!-- Sección principal -->
     <section class="seccion-servicios">
@@ -117,6 +117,6 @@
     </section>
     
     <!-- Aqui agregamos el componente del footer -->
-    <?php include '../app/views/componentes/footer.php'; ?>
+<?php include __DIR__ . '/-componentes/footer.php'; ?>
 </body>
 </html>

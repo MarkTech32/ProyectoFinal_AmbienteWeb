@@ -6,15 +6,15 @@
     <title>Tutorías - TutoX</title>
     
     <!-- CSS base (siempre se carga) -->
-    <link rel="stylesheet" href="css/stylesComponentes.css">
+<link rel="stylesheet" href="css/stylesComponentes.css">
     
     <!-- CSS específico para tutorías -->
-    <link rel="stylesheet" href="css/tutorias.css">
+<link rel="stylesheet" href="css/tutorias.css">
 </head>
 <body>
     
     <!-- Aqui agregamos el componente del navbar -->
-    <?php include '../app/views/componentes/navbar.php'; ?>
+<?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <!-- Sección principal -->
     <section class="seccion-tutorias">
@@ -105,6 +105,6 @@
     </section>
     
     <!-- Aqui agregamos el componente del footer -->
-    <?php include '../app/views/componentes/footer.php'; ?>
+<?php include __DIR__ . '/-componentes/footer.php'; ?>
 </body>
 </html>

@@ -9,14 +9,15 @@ ini_set('display_errors', 1);
     <title>FAQ - TutoX</title>
 
     <!-- CSS base -->
-    <link rel="stylesheet" href="css/stylesComponentes.css">
-    <link rel="stylesheet" href="css/faq.css">
+<link rel="stylesheet" href="css/stylesComponentes.css">
+
+<link rel="stylesheet" href="css/faq.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navbar -->
-    <?php include __DIR__ . '/../app/views/componentes/navbar.php'; ?>
+<?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <!-- Sección principal -->
     <section class="seccion-faq">
@@ -96,7 +97,7 @@ ini_set('display_errors', 1);
     </section>
 
     <!-- Footer -->
-    <?php include __DIR__ . '/../app/views/componentes/footer.php'; ?>
+<?php include __DIR__ . '/-componentes/footer.php'; ?>
 
     <script>
         function toggleFAQ(element) {
