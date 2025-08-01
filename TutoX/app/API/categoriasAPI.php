@@ -1,7 +1,9 @@
 <?php
+// API para obtener las categorias
 header('Content-Type: application/json');
 
-// Conexión a la base de datos
+
+//Conexcion a la base de datos
 $conexion = new mysqli('localhost', 'root', '', 'AmbWeb');
 
 if ($conexion->connect_error) {
@@ -10,16 +12,25 @@ if ($conexion->connect_error) {
     exit;
 }
 
+
+//Consulta para obtener las categorias
 $sql = "SELECT id, nombre FROM categorias";
 $resultado = $conexion->query($sql);
 
-$categorias = [];
 
-while ($fila = $resultado->fetch_assoc()) {
+
+// array para almacenar las categorias
+$categorias = []; 
+
+
+
+// Recorrer los resultados y agregarlos al array
+while ($fila = $resultado->fetch_assoc()) {  
     $categorias[] = [
         'id' => $fila['id'],
         'nombre' => $fila['nombre']
     ];
 }
+
 
 echo json_encode($categorias);
