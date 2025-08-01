@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('../app/API/tutoriasMostrar.php')
     .then(response => response.json())
     .then(tutorias => {
-      contenedorTarjetas.innerHTML = ''; // limpiar contenido
+      contenedorTarjetas.innerHTML = ''; 
 
       if (tutorias.length === 0) {
         contenedorTarjetas.innerHTML = '<p>No hay tutorías disponibles.</p>';

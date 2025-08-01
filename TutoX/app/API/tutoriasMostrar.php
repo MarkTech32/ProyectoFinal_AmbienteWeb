@@ -1,8 +1,12 @@
 <?php
+
+// API para mostrar las tutorias
 header('Content-Type: application/json');
 
-// Conexión a la base de datos
+
+// Conexcion a la base de datos
 $conexion = new mysqli('localhost', 'root', '', 'AmbWeb');
+
 
 if ($conexion->connect_error) {
     http_response_code(500);
@@ -10,6 +14,7 @@ if ($conexion->connect_error) {
     exit;
 }
 
+// Consulta para obtener las tutorias
 $sql = "SELECT 
           s.titulo,
           s.descripcion,
@@ -25,6 +30,7 @@ $sql = "SELECT
         ORDER BY s.fecha_creacion DESC
         LIMIT 6";
 
+//Ejecutar la consulta
 $resultado = $conexion->query($sql);
 
 if (!$resultado) {
@@ -33,10 +39,14 @@ if (!$resultado) {
     exit;
 }
 
+// almacenar los resultados en un array
 $tutorias = [];
 
+
+// Recorrer los resultados y agregarlos al array
 while ($fila = $resultado->fetch_assoc()) {
     $tutorias[] = $fila;
 }
+
 
 echo json_encode($tutorias);
