@@ -117,6 +117,9 @@
     </section>
     
     <!-- Aqui agregamos el componente del footer -->
-<?php include __DIR__ . '/-componentes/footer.php'; ?>
+
+
+<?php include __DIR__ . '/../componentes/footer.php'; ?>
+
 </body>
 </html>

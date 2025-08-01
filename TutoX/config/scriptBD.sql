@@ -1,10 +1,10 @@
--- Crear esquema/Base de datos AmbWeb
+
 CREATE DATABASE AmbWeb;
 
--- Usar esquema/Base de datos AmbWeb
+
 USE AmbWeb;
 
--- Tabla usuarios
+
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -13,13 +13,13 @@ CREATE TABLE usuarios (
     carrera VARCHAR(100)
 );
 
--- Tabla categorias
+
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL COMMENT 'Programación, Inglés, Matemáticas'
 );
 
--- Tabla servicios
+
 CREATE TABLE servicios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE servicios (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE RESTRICT
 );
 
--- Tabla reservas
+
 CREATE TABLE reservas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_servicio INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE reservas (
     FOREIGN KEY (id_cliente) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
--- Tabla calificaciones
+
 CREATE TABLE calificaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_reserva INT NOT NULL,
@@ -60,3 +60,15 @@ CREATE TABLE calificaciones (
     
     FOREIGN KEY (id_reserva) REFERENCES reservas(id) ON DELETE CASCADE
 );
+
+
+
+
+CREATE TABLE tipos_servicio (
+    id TINYINT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL COMMENT 'servicio, tutoria'
+);
+
+ALTER TABLE servicios
+ADD id_tipo TINYINT NOT NULL DEFAULT 1 COMMENT '1 = servicio, 2 = tutoría',
+ADD FOREIGN KEY (id_tipo) REFERENCES tipos_servicio(id);
