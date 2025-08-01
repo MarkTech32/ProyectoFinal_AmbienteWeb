@@ -25,11 +25,17 @@ switch ($page) {
     case 'tutorias':
         include '../app/views/pages/tutorias.php';
         break;
+
+    case 'agregarTuto':
+    include '../app/views/pages/agregarTuto.php';
+    break;
         
     case 'faq':
     case 'preguntas':
         include '../app/views/pages/faq.php';
         break;
+
+        
         
     default:
         // Si la página no existe, mostrar inicio

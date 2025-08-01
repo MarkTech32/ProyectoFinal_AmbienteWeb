@@ -97,7 +97,7 @@ ini_set('display_errors', 1);
     </section>
 
     <!-- Footer -->
-<?php include __DIR__ . '/-componentes/footer.php'; ?>
+<?php include __DIR__ . '/../componentes/footer.php'; ?>
 
     <script>
         function toggleFAQ(element) {

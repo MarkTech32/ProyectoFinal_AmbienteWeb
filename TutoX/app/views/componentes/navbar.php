@@ -6,6 +6,7 @@
                   <li><a href="index.php?page=servicios">Servicios</a></li>
                   <li><a href="index.php?page=faq">FAQ</a></li>
                   <li><a href="index.php?page=miperfil">Mi Perfil</a></li>
+   
             </ul>
         </div>
 </nav>
