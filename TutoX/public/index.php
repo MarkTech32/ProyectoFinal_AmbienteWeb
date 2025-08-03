@@ -35,8 +35,7 @@ switch ($page) {
         include '../app/views/pages/faq.php';
         break;
 
-        
-        
+
     default:
         // Si la página no existe, mostrar inicio
         include '../app/views/pages/index.php';

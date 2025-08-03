@@ -66,7 +66,7 @@
     </select>
 
     <!-- Cargar servicios desde la API-->   
-<select name="id_servicio" id="servicioSelect" required>
+<select name="id_tipo" id="servicioSelect" required>
 
     <option value="">Cargando Servicios...</option>
 
