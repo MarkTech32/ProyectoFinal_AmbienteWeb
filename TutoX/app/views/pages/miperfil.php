@@ -6,6 +6,11 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/../../controllers/AuthController.php';
 $auth = new AuthController();
 
+// Procesar logout PRIMERO
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    $auth->logout();
+}
+
 $mensaje = '';
 $tipo_mensaje = '';
 

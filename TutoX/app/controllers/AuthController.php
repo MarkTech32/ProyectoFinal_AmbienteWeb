@@ -1,4 +1,5 @@
 <?php
+// app/controllers/AuthController.php
 
 class AuthController {
     private $usuarioModel;
@@ -38,8 +39,9 @@ class AuthController {
     
     // Cerrar sesión
     public function logout() {
+        session_start();
         session_destroy();
-        header('Location: index.php?page=miperfil');
+        header('Location: index.php?page=home');
         exit();
     }
     
