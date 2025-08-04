@@ -4,8 +4,19 @@ class Usuario {
     private $conn;
     
     public function __construct() {
-        require_once __DIR__ . '/../../config/db.php';
-        $this->conn = $conn;
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "AmbWeb";
+        $port = 3306;
+        
+        $this->conn = new mysqli($servername, $username, $password, $database, $port);
+        
+        if ($this->conn->connect_error) {
+            die("Error de conexión: " . $this->conn->connect_error);
+        }
+        
+        $this->conn->set_charset("utf8");
     }
     
     // Buscar usuario por email

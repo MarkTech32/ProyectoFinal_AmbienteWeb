@@ -146,7 +146,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'logout') {
                 </form>
 
                 <div class="registro-link">
-                    <p>¿No tienes una cuenta? <a href="#">Regístrate aquí</a></p>
+                    <p>¿No tienes una cuenta? <a href="index.php?page=registroUsuario">Regístrate aquí</a></p>
                 </div>
             </div>
         </div>
