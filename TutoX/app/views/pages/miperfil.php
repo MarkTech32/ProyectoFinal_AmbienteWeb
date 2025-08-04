@@ -1,22 +1,86 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+// Incluir el controlador de autenticación
+require_once __DIR__ . '/../../controllers/AuthController.php';
+$auth = new AuthController();
+
+// Procesar logout PRIMERO
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    $auth->logout();
+}
+
+$mensaje = '';
+$tipo_mensaje = '';
+
+// Procesar formulario de login
+if ($_POST) {
+    if (isset($_POST['email']) && isset($_POST['password'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        
+        $resultado = $auth->login($email, $password);
+        
+        if ($resultado['success']) {
+            // Login exitoso - redirigir
+            header('Location: index.php?page=miperfil');
+            exit();
+        } else {
+            // Error en login
+            $mensaje = $resultado['message'];
+            $tipo_mensaje = 'error';
+        }
+    }
+}
+
+// Si ya está logueado, mostrar perfil
+if ($auth->estaLogueado()) {
+    $usuario = $auth->usuarioActual();
+    ?>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mi Perfil - TutoX</title>
+        <link rel="stylesheet" href="css/stylesComponentes.css">
+        <link rel="stylesheet" href="css/miperfil.css">
+    </head>
+    <body>
+        <?php include __DIR__ . '/../componentes/navbar.php'; ?>
+        
+        <div style="padding-top: 100px; text-align: center;">
+            <h1>¡Bienvenido, <?= htmlspecialchars($usuario['nombre']) ?>!</h1>
+            <p>Email: <?= htmlspecialchars($usuario['email']) ?></p>
+            <br>
+            <a href="index.php?page=miperfil&action=logout" class="boton boton-primario">Cerrar Sesión</a>
+        </div>
+        
+        <?php include __DIR__ . '/../componentes/footer.php'; ?>
+    </body>
+    </html>
+    <?php
+    exit();
+}
+
+// Procesar logout
+if (isset($_GET['action']) && $_GET['action'] == 'logout') {
+    $auth->logout();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Mi Perfil - TutoX</title>
-
-    <!-- CSS base -->
-<link rel="stylesheet" href="css/stylesComponentes.css">
-<link rel="stylesheet" href="css/miperfil.css" id="css-miperfil">
+    <link rel="stylesheet" href="css/stylesComponentes.css">
+    <link rel="stylesheet" href="css/miperfil.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Navbar -->
-<?php include __DIR__ . '/../componentes/navbar.php'; ?>
+    <?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <div class="contenedor-login">
         <!-- Sección de bienvenida -->
@@ -49,7 +113,13 @@ ini_set('display_errors', 1);
                     <p>Accede a tu cuenta para continuar</p>
                 </div>
 
-                <form class="formulario-login" action="#" method="POST">
+                <?php if ($mensaje): ?>
+                    <div style="padding: 10px; margin-bottom: 15px; border-radius: 5px; <?= $tipo_mensaje == 'error' ? 'background: #ffebee; color: #c62828; border: 1px solid #ef5350;' : 'background: #e8f5e8; color: #2e7d32; border: 1px solid #4caf50;' ?>">
+                        <?= htmlspecialchars($mensaje) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form class="formulario-login" method="POST">
                     <div class="grupo-input">
                         <label for="email">Correo electrónico</label>
                         <div class="input-con-icono">
@@ -76,14 +146,13 @@ ini_set('display_errors', 1);
                 </form>
 
                 <div class="registro-link">
-                    <p>¿No tienes una cuenta? <a href="#">Regístrate aquí</a></p>
+                    <p>¿No tienes una cuenta? <a href="index.php?page=registroUsuario">Regístrate aquí</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-<?php include __DIR__ . '/../componentes/footer.php'; ?>
+    <?php include __DIR__ . '/../componentes/footer.php'; ?>
 
     <script>
         function togglePassword() {

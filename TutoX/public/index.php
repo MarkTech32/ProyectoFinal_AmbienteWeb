@@ -18,6 +18,11 @@ switch ($page) {
         include '../app/views/pages/miperfil.php';
         break;
         
+    case 'registroUsuario':
+    case 'registro':
+        include '../app/views/pages/registroUsuario.php';
+        break;
+        
     case 'servicios':
         include '../app/views/pages/servicios.php';
         break;
@@ -27,14 +32,13 @@ switch ($page) {
         break;
 
     case 'agregarTuto':
-    include '../app/views/pages/agregarTuto.php';
-    break;
+        include '../app/views/pages/agregarTuto.php';
+        break;
         
     case 'faq':
     case 'preguntas':
         include '../app/views/pages/faq.php';
         break;
-
 
     default:
         // Si la página no existe, mostrar inicio

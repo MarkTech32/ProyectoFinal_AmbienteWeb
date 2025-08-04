@@ -72,3 +72,20 @@ CREATE TABLE tipos_servicio (
 ALTER TABLE servicios
 ADD id_tipo TINYINT NOT NULL DEFAULT 1 COMMENT '1 = servicio, 2 = tutoría',
 ADD FOREIGN KEY (id_tipo) REFERENCES tipos_servicio(id);
+
+USE AmbWeb;
+ALTER TABLE usuarios ADD COLUMN password VARCHAR(255) NOT NULL;
+
+USE AmbWeb;
+
+INSERT INTO usuarios (nombre, email, password, telefono, carrera) 
+VALUES (
+    'Juan Pérez', 
+    'juan@test.com', 
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    '88888888',
+    'Ingeniería en Sistemas'
+);
+--Credenciales para comprobar el login:
+--Usuario: juan@test.com
+--Contraseña: password
