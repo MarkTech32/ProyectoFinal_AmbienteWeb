@@ -34,6 +34,9 @@ class Usuario {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO usuarios (nombre, email, password, telefono, carrera) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
+
+        
+
         $stmt->bind_param("sssss", $nombre, $email, $password_hash, $telefono, $carrera);
         return $stmt->execute();
     }
