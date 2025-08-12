@@ -89,3 +89,31 @@ VALUES (
 --Credenciales para comprobar el login:
 --Usuario: juan@test.com
 --Contraseña: password
+
+
+
+CREATE TABLE solicitudes_tutorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_tutoria INT NOT NULL COMMENT 'ID del servicio que es tipo tutoría',
+    id_solicitante INT NOT NULL COMMENT 'Usuario que solicita la tutoría',
+    fecha_solicitada DATE NOT NULL,
+    hora_solicitada VARCHAR(10) NOT NULL COMMENT 'HH:MM',
+    mensaje TEXT,
+    estado ENUM('pendiente','confirmada','rechazada') DEFAULT 'pendiente',
+    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_tutoria) REFERENCES servicios(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_solicitante) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE historial_tutorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_solicitud INT NOT NULL,
+    estado_final ENUM('completada','cancelada') NOT NULL,
+    fecha_completada DATETIME,
+    reseña TEXT,
+    puntuacion TINYINT CHECK (puntuacion >= 1 AND puntuacion <= 5),
+    
+    FOREIGN KEY (id_solicitud) REFERENCES solicitudes_tutorias(id) ON DELETE CASCADE
+);

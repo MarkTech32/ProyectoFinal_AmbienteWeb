@@ -13,20 +13,21 @@ $keywordSQL = "%$keyword%";
 
 if ($keyword !== '') {
   
-    $sql = "SELECT 
-            s.titulo,
-            s.descripcion,
-            s.precio_por_hora,
-            s.modalidad,
-            s.fecha_creacion,
-            ts.nombre AS tipo_nombre,
-            c.nombre AS categoria_nombre
-        FROM servicios s
-        JOIN tipos_servicio ts ON s.id_tipo = ts.id
-        JOIN categorias c ON s.id_categoria = c.id
-        WHERE s.id_tipo = 2 
-          AND (s.titulo LIKE ? OR s.descripcion LIKE ?)
-        ORDER BY s.fecha_creacion DESC";
+        $sql = "SELECT 
+                        s.id AS id,
+                        s.titulo,
+                        s.descripcion,
+                        s.precio_por_hora,
+                        s.modalidad,
+                        s.fecha_creacion,
+                        ts.nombre AS tipo_nombre,
+                        c.nombre AS categoria_nombre
+                FROM servicios s
+                JOIN tipos_servicio ts ON s.id_tipo = ts.id
+                JOIN categorias c ON s.id_categoria = c.id
+                WHERE s.id_tipo = 2 
+                    AND (s.titulo LIKE ? OR s.descripcion LIKE ?)
+                ORDER BY s.fecha_creacion DESC";
     
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param('ss', $keywordSQL, $keywordSQL);
@@ -34,20 +35,21 @@ if ($keyword !== '') {
     $resultado = $stmt->get_result();
 } else {
    
-    $sql = "SELECT 
-              s.titulo,
-              s.descripcion,
-              s.precio_por_hora,
-              s.modalidad,
-              s.fecha_creacion,
-              ts.nombre AS tipo_nombre,
-              c.nombre AS categoria_nombre
-            FROM servicios s
-            JOIN tipos_servicio ts ON s.id_tipo = ts.id
-            JOIN categorias c ON s.id_categoria = c.id
-            WHERE s.id_tipo = 2
-            ORDER BY s.fecha_creacion DESC
-            LIMIT 6";
+        $sql = "SELECT 
+                            s.id AS id,
+                            s.titulo,
+                            s.descripcion,
+                            s.precio_por_hora,
+                            s.modalidad,
+                            s.fecha_creacion,
+                            ts.nombre AS tipo_nombre,
+                            c.nombre AS categoria_nombre
+                        FROM servicios s
+                        JOIN tipos_servicio ts ON s.id_tipo = ts.id
+                        JOIN categorias c ON s.id_categoria = c.id
+                        WHERE s.id_tipo = 2
+                        ORDER BY s.fecha_creacion DESC
+                        LIMIT 6";
     $resultado = $conexion->query($sql);
 }
 
