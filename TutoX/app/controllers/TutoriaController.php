@@ -110,5 +110,50 @@ class TutoriaController {
         $tutorias = $this->tutoria->obtenerPorUsuario($_SESSION['usuario']['id']);
         include '../app/views/tutorias/mis-tutorias.php';
     }
+
+    public function agendar() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=tutorias');
+            exit;
+        }
+
+        $tutoria = $this->tutoria->obtenerPorId($id);
+        if (!$tutoria) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=tutorias');
+            exit;
+        }
+
+        $mensaje = null;
+
+        if ($_POST) {
+            $fecha_solicitada = $_POST['fecha_solicitada'];
+            $hora_solicitada = $_POST['hora_solicitada'];
+            $mensaje_usuario = $_POST['mensaje'] ?? '';
+
+            if ($this->tutoria->crearReserva($id, $_SESSION['usuario']['id'], $fecha_solicitada, $hora_solicitada, $mensaje_usuario)) {
+                $mensaje = "¡La tutoría se agendó correctamente!";
+            } else {
+                $mensaje = "Error al agendar la tutoría";
+            }
+        }
+
+        include '../app/views/tutorias/agendar.php';
+    }
+
+    public function misCitas() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $citas = $this->tutoria->obtenerReservasPorUsuario($_SESSION['usuario']['id']);
+        include '../app/views/tutorias/mis-citas.php';
+    }
 }
 ?>

@@ -35,6 +35,24 @@ switch ($page) {
         $controller->editar();
         break;
         
+    case 'tutoria-detalle':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->detalle();
+        break;
+        
+    case 'agendar-tutoria':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->agendar();
+        break;
+        
+    case 'mis-citas':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->misCitas();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;

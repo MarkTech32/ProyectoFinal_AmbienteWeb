@@ -1,0 +1,251 @@
+/* Estilos específicos para detalle de tutoría */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+/* Container principal */
+.detalle-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.detalle-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Contenido principal */
+.detalle-main {
+    background: white;
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.materia-tag-large {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.descripcion-completa {
+    margin-bottom: 2.5rem;
+}
+
+.descripcion-completa h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+}
+
+.descripcion-completa p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.modalidad-detalle,
+.ubicacion-detalle {
+    margin-bottom: 2rem;
+}
+
+.modalidad-detalle h3,
+.ubicacion-detalle h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.modalidad-info-large,
+.ubicacion-info-large {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #667eea;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.modalidad-info-large i,
+.ubicacion-info-large i {
+    font-size: 1.3rem;
+}
+
+/* Sidebar */
+.detalle-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tutor-card,
+.precio-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.tutor-card h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tutor-info-detalle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tutor-avatar {
+    color: #667eea;
+    font-size: 3rem;
+}
+
+.tutor-datos h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.tutor-datos p {
+    color: #666;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.tutor-datos i {
+    color: #667eea;
+    margin-right: 0.5rem;
+}
+
+/* Precio */
+.precio-grande {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+    border-radius: 12px;
+}
+
+.precio-valor-grande {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+}
+
+.precio-texto-grande {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Acciones */
+.acciones-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-agendar {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.btn-agendar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+.btn-agendar i {
+    margin-right: 0.5rem;
+}
+
+.btn-volver {
+    background: #f8f9fa;
+    color: #666;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+}
+
+.btn-volver:hover {
+    background: #e9ecef;
+    border-color: #ced4da;
+}
+
+.btn-volver i {
+    margin-right: 0.5rem;
+}
+
+/* Animaciones */
+@keyframes aparecerDesdeAbajo {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detalle-main,
+.tutor-card,
+.precio-card {
+    animation: aparecerDesdeAbajo 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .detalle-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .detalle-main,
+    .tutor-card,
+    .precio-card {
+        padding: 1.5rem;
+    }
+    
+    .detalle-container {
+        padding: 40px 15px;
+    }
+    
+    .tutor-info-detalle {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .precio-valor-grande {
+        font-size: 2rem;
+    }
+}

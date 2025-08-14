@@ -55,5 +55,27 @@ class Tutoria {
         ");
         return $stmt->execute([$titulo, $descripcion, $materia, $precio, $modalidad, $ubicacion, $id]);
     }
+    
+    public function crearReserva($id_tutoria, $id_cliente, $fecha_solicitada, $hora_solicitada, $mensaje) {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO reservas_tutorias (id_tutoria, id_cliente, fecha_solicitada, hora_solicitada, mensaje) 
+            VALUES (?, ?, ?, ?, ?)
+        ");
+        return $stmt->execute([$id_tutoria, $id_cliente, $fecha_solicitada, $hora_solicitada, $mensaje]);
+    }
+    
+    public function obtenerReservasPorUsuario($usuario_id) {
+        $stmt = $this->pdo->prepare("
+            SELECT r.*, t.titulo, t.materia, t.precio, t.modalidad, t.ubicacion, 
+                   u.nombre as tutor_nombre, u.email as tutor_email, u.telefono as tutor_telefono
+            FROM reservas_tutorias r 
+            JOIN tutorias t ON r.id_tutoria = t.id 
+            JOIN usuarios u ON t.usuario_id = u.id 
+            WHERE r.id_cliente = ? 
+            ORDER BY r.fecha_solicitud DESC
+        ");
+        $stmt->execute([$usuario_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
