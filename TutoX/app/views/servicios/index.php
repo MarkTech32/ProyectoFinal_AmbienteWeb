@@ -14,7 +14,7 @@
 <body>
     
     <!-- Aqui agregamos el componente del navbar -->
-    <?php include '../app/views/componentes/navbar.php'; ?>
+<?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <!-- Sección principal -->
     <section class="seccion-servicios">
@@ -117,6 +117,6 @@
     </section>
     
     <!-- Aqui agregamos el componente del footer -->
-    <?php include '../app/views/componentes/footer.php'; ?>
+<?php include __DIR__ . '/../componentes/footer.php'; ?>
 </body>
 </html>

@@ -10,13 +10,13 @@ ini_set('display_errors', 1);
 
     <!-- CSS base -->
     <link rel="stylesheet" href="css/stylesComponentes.css">
-    <link rel="stylesheet" href="css/miperfil.css" id="css-miperfil">
+    <link rel="stylesheet" href="css/miperfil.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navbar -->
-    <?php include __DIR__ . '/../app/views/componentes/navbar.php'; ?>
+<?php include __DIR__ . '/../componentes/navbar.php'; ?>
 
     <div class="contenedor-login">
         <!-- Sección de bienvenida -->
@@ -83,7 +83,7 @@ ini_set('display_errors', 1);
     </div>
 
     <!-- Footer -->
-    <?php include __DIR__ . '/../app/views/componentes/footer.php'; ?>
+<?php include __DIR__ . '/../componentes/footer.php'; ?>
 
     <script>
         function togglePassword() {
