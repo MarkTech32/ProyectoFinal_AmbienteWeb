@@ -17,6 +17,12 @@ switch ($page) {
         $controller->index();
         break;
         
+    case 'crear-tutoria':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->crear();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;
