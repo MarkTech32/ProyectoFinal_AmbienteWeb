@@ -62,6 +62,45 @@ class TutoriaController {
         include '../app/views/tutorias/crear.php';
     }
 
+    public function editar() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-publicaciones');
+            exit;
+        }
+
+        $tutoria = $this->tutoria->obtenerPorId($id);
+        if (!$tutoria || $tutoria['usuario_id'] != $_SESSION['usuario']['id']) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-publicaciones');
+            exit;
+        }
+
+        $error = null;
+
+        if ($_POST) {
+            $titulo = $_POST['titulo'];
+            $descripcion = $_POST['descripcion'];
+            $materia = $_POST['materia'];
+            $precio = $_POST['precio'];
+            $modalidad = $_POST['modalidad'];
+            $ubicacion = $_POST['ubicacion'] ?? '';
+
+            if ($this->tutoria->actualizar($id, $titulo, $descripcion, $materia, $precio, $modalidad, $ubicacion)) {
+                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-publicaciones');
+                exit;
+            } else {
+                $error = "Error al actualizar la tutoría";
+            }
+        }
+
+        include '../app/views/tutorias/editar.php';
+    }
+
     public function misTutorias() {
         if (!isset($_SESSION['usuario'])) {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');

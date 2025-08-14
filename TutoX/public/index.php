@@ -23,6 +23,18 @@ switch ($page) {
         $controller->crear();
         break;
         
+    case 'mis-publicaciones':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->misTutorias();
+        break;
+        
+    case 'editar-tutoria':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->editar();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;

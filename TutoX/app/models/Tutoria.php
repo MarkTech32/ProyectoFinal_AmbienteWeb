@@ -46,5 +46,14 @@ class Tutoria {
         ");
         return $stmt->execute([$usuario_id, $titulo, $descripcion, $materia, $precio, $modalidad, $ubicacion]);
     }
+    
+    public function actualizar($id, $titulo, $descripcion, $materia, $precio, $modalidad, $ubicacion) {
+        $stmt = $this->pdo->prepare("
+            UPDATE tutorias 
+            SET titulo = ?, descripcion = ?, materia = ?, precio = ?, modalidad = ?, ubicacion = ?
+            WHERE id = ?
+        ");
+        return $stmt->execute([$titulo, $descripcion, $materia, $precio, $modalidad, $ubicacion, $id]);
+    }
 }
 ?>
