@@ -132,3 +132,68 @@ body {
         flex-direction: column;
     }
 }
+
+
+.feature-card {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+ background: linear-gradient(135deg, #667eea 0%, #d4b5f3 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-card input,
+.feature-card textarea,
+.feature-card select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.feature-card textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.feature-card button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    background: linear-gradient(45deg, var(--color-primario), var(--color-secundario));
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+  
+}
+
+.feature-card button:hover {
+  background-color: #e68900;
+  
+}
+
+
+
