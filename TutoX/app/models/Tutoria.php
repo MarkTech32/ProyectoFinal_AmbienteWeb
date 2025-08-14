@@ -77,5 +77,13 @@ class Tutoria {
         $stmt->execute([$usuario_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function eliminarReserva($id_reserva, $id_cliente) {
+        $stmt = $this->pdo->prepare("
+            DELETE FROM reservas_tutorias 
+            WHERE id = ? AND id_cliente = ?
+        ");
+        return $stmt->execute([$id_reserva, $id_cliente]);
+    }
 }
 ?>

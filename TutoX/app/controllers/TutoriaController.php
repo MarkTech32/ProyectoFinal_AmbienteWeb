@@ -155,5 +155,26 @@ class TutoriaController {
         $citas = $this->tutoria->obtenerReservasPorUsuario($_SESSION['usuario']['id']);
         include '../app/views/tutorias/mis-citas.php';
     }
+
+    public function cancelarCita() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas');
+            exit;
+        }
+
+        if ($this->tutoria->eliminarReserva($id, $_SESSION['usuario']['id'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=cancelada');
+            exit;
+        } else {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&error=1');
+            exit;
+        }
+    }
 }
 ?>

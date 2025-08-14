@@ -11,6 +11,44 @@ body {
     padding: 60px 20px;
 }
 
+/* Mensajes de confirmación */
+.mensaje-cancelacion {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    animation: aparecerDesdeArriba 0.6s ease-out;
+}
+
+.mensaje-error {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+    animation: aparecerDesdeArriba 0.6s ease-out;
+}
+
+.mensaje-cancelacion i,
+.mensaje-error i {
+    font-size: 1.5rem;
+}
+
+.mensaje-cancelacion span,
+.mensaje-error span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
 /* Grid de citas */
 .citas-grid {
     display: grid;
@@ -161,7 +199,7 @@ body {
 .cita-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid #f0f0f0;
@@ -181,6 +219,32 @@ body {
 .precio-texto {
     font-size: 0.8rem;
     color: #999;
+}
+
+.cita-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+}
+
+.btn-cancelar-cita {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-cancelar-cita:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
 .fecha-solicitud {
@@ -283,6 +347,17 @@ body {
     }
 }
 
+@keyframes aparecerDesdeArriba {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .citas-grid {
@@ -305,8 +380,19 @@ body {
     
     .cita-footer {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.5rem;
+        align-items: center;
         text-align: center;
+    }
+    
+    .cita-acciones {
+        align-items: center;
+        width: 100%;
+    }
+    
+    .btn-cancelar-cita {
+        width: 100%;
+        justify-content: center;
     }
     
     .contacto-info {

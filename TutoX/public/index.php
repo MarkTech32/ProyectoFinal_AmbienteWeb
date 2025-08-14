@@ -53,6 +53,12 @@ switch ($page) {
         $controller->misCitas();
         break;
         
+    case 'cancelar-cita':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->cancelarCita();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;

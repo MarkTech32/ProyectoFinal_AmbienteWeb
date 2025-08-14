@@ -24,6 +24,22 @@
 
     <!-- Lista de citas -->
     <div class="mis-citas-container">
+        
+        <!-- Mensaje de confirmación de cancelación -->
+        <?php if (isset($_GET['mensaje']) && $_GET['mensaje'] == 'cancelada'): ?>
+            <div class="mensaje-cancelacion">
+                <i class="fas fa-check-circle"></i>
+                <span>¡Cita cancelada exitosamente!</span>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['error'])): ?>
+            <div class="mensaje-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Error al cancelar la cita. Inténtalo nuevamente.</span>
+            </div>
+        <?php endif; ?>
+
         <?php if (!empty($citas)): ?>
             <div class="citas-grid">
                 <?php foreach ($citas as $cita): ?>
@@ -101,8 +117,18 @@
                                 <span class="precio-texto">por sesión</span>
                             </div>
                             
-                            <div class="fecha-solicitud">
-                                <small>Agendada el <?php echo date('d/m/Y', strtotime($cita['fecha_solicitud'])); ?></small>
+                            <div class="cita-acciones">
+                                <?php if ($cita['estado'] == 'pendiente' || $cita['estado'] == 'confirmada'): ?>
+                                    <a href="?page=cancelar-cita&id=<?php echo $cita['id']; ?>" 
+                                       class="btn-cancelar-cita"
+                                       onclick="return confirm('¿Estás seguro de que quieres cancelar esta cita?')">
+                                        <i class="fas fa-times"></i>
+                                        Cancelar Cita
+                                    </a>
+                                <?php endif; ?>
+                                <div class="fecha-solicitud">
+                                    <small>Agendada el <?php echo date('d/m/Y', strtotime($cita['fecha_solicitud'])); ?></small>
+                                </div>
                             </div>
                         </div>
 
