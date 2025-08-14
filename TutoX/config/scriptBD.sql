@@ -1,10 +1,10 @@
-
+-- Crear esquema/Base de datos AmbWeb
 CREATE DATABASE AmbWeb;
 
-
+-- Usar esquema/Base de datos AmbWeb
 USE AmbWeb;
 
-
+-- Tabla usuarios
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -13,13 +13,13 @@ CREATE TABLE usuarios (
     carrera VARCHAR(100)
 );
 
-
+-- Tabla categorias
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL COMMENT 'Programación, Inglés, Matemáticas'
 );
 
-
+-- Tabla servicios
 CREATE TABLE servicios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE servicios (
     FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE RESTRICT
 );
 
-
+-- Tabla reservas
 CREATE TABLE reservas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_servicio INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE reservas (
     FOREIGN KEY (id_cliente) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
-
+-- Tabla calificaciones
 CREATE TABLE calificaciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_reserva INT NOT NULL,
@@ -59,61 +59,4 @@ CREATE TABLE calificaciones (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     
     FOREIGN KEY (id_reserva) REFERENCES reservas(id) ON DELETE CASCADE
-);
-
-
-
-
-CREATE TABLE tipos_servicio (
-    id TINYINT PRIMARY KEY,
-    nombre VARCHAR(20) NOT NULL COMMENT 'servicio, tutoria'
-);
-
-ALTER TABLE servicios
-ADD id_tipo TINYINT NOT NULL DEFAULT 1 COMMENT '1 = servicio, 2 = tutoría',
-ADD FOREIGN KEY (id_tipo) REFERENCES tipos_servicio(id);
-
-USE AmbWeb;
-ALTER TABLE usuarios ADD COLUMN password VARCHAR(255) NOT NULL;
-
-USE AmbWeb;
-
-INSERT INTO usuarios (nombre, email, password, telefono, carrera) 
-VALUES (
-    'Juan Pérez', 
-    'juan@test.com', 
-    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-    '88888888',
-    'Ingeniería en Sistemas'
-);
---Credenciales para comprobar el login:
---Usuario: juan@test.com
---Contraseña: password
-
-
-
-CREATE TABLE solicitudes_tutorias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_tutoria INT NOT NULL COMMENT 'ID del servicio que es tipo tutoría',
-    id_solicitante INT NOT NULL COMMENT 'Usuario que solicita la tutoría',
-    fecha_solicitada DATE NOT NULL,
-    hora_solicitada VARCHAR(10) NOT NULL COMMENT 'HH:MM',
-    mensaje TEXT,
-    estado ENUM('pendiente','confirmada','rechazada') DEFAULT 'pendiente',
-    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (id_tutoria) REFERENCES servicios(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_solicitante) REFERENCES usuarios(id) ON DELETE CASCADE
-);
-
-
-CREATE TABLE historial_tutorias (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_solicitud INT NOT NULL,
-    estado_final ENUM('completada','cancelada') NOT NULL,
-    fecha_completada DATETIME,
-    reseña TEXT,
-    puntuacion TINYINT CHECK (puntuacion >= 1 AND puntuacion <= 5),
-    
-    FOREIGN KEY (id_solicitud) REFERENCES solicitudes_tutorias(id) ON DELETE CASCADE
 );
