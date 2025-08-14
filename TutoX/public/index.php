@@ -12,7 +12,9 @@ switch ($page) {
         break;
         
     case 'tutorias':
-        include '../app/views/tutorias/index.php';
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->index();
         break;
         
     case 'servicios':
