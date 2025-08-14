@@ -60,3 +60,6 @@ CREATE TABLE calificaciones (
     
     FOREIGN KEY (id_reserva) REFERENCES reservas(id) ON DELETE CASCADE
 );
+
+--Se agrego a la tabla USUARIOS el atributo password para hacer el login
+ALTER TABLE usuarios ADD COLUMN password VARCHAR(255) NOT NULL AFTER email;

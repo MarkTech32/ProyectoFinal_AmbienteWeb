@@ -20,7 +20,21 @@ switch ($page) {
         break;
         
     case 'miperfil':
-        include '../app/views/miperfil/login.php';
+        require_once '../app/controllers/AuthController.php';
+        $auth = new AuthController();
+        $auth->login();
+        break;
+        
+    case 'logout':
+        require_once '../app/controllers/AuthController.php';
+        $auth = new AuthController();
+        $auth->logout();
+        break;
+        
+    case 'registro':
+        require_once '../app/controllers/AuthController.php';
+        $auth = new AuthController();
+        $auth->registro();
         break;
         
     case 'faq':

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Perfil - TutoX</title>
+    <title>Registro - TutoX</title>
     <!-- CSS base con rutas corregidas -->
     <link rel="stylesheet" href="/ProyectoFinal_AmbienteWeb/TutoX/public/css/stylesComponentes.css">
     <link rel="stylesheet" href="/ProyectoFinal_AmbienteWeb/TutoX/public/css/miperfil.css">
@@ -17,31 +17,31 @@
         <!-- Sección de bienvenida -->
         <div class="seccion-bienvenida">
             <div class="contenido-bienvenida">
-                <h1>¡Bienvenido a tutoX!</h1>
-                <p>La plataforma donde estudiantes universitarios conectan para compartir conocimiento y crecer juntos.</p>
+                <h1>¡Únete a tutoX!</h1>
+                <p>Crea tu cuenta y comienza a formar parte de la comunidad estudiantil más grande.</p>
                 <div class="caracteristicas">
                     <div class="caracteristica">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Registro rápido y fácil</span>
+                    </div>
+                    <div class="caracteristica">
                         <i class="fas fa-graduation-cap"></i>
-                        <span>Tutorías personalizadas</span>
+                        <span>Acceso a tutorías</span>
                     </div>
                     <div class="caracteristica">
-                        <i class="fas fa-users"></i>
-                        <span>Comunidad estudiantil</span>
-                    </div>
-                    <div class="caracteristica">
-                        <i class="fas fa-star"></i>
-                        <span>Servicios profesionales</span>
+                        <i class="fas fa-handshake"></i>
+                        <span>Ofrece tus servicios</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Formulario de login -->
+        <!-- Formulario de registro -->
         <div class="seccion-formulario">
             <div class="contenedor-form">
                 <div class="header-form">
-                    <h2>Iniciar Sesión</h2>
-                    <p>Accede a tu cuenta para continuar</p>
+                    <h2>Crear Cuenta</h2>
+                    <p>Completa tus datos para registrarte</p>
                 </div>
 
                 <?php if (isset($error)): ?>
@@ -50,7 +50,15 @@
                     </div>
                 <?php endif; ?>
 
-                <form class="formulario-login" action="?page=miperfil" method="POST">
+                <form class="formulario-login" action="?page=registro" method="POST">
+                    <div class="grupo-input">
+                        <label for="nombre">Nombre completo</label>
+                        <div class="input-con-icono">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                        </div>
+                    </div>
+
                     <div class="grupo-input">
                         <label for="email">Correo electrónico</label>
                         <div class="input-con-icono">
@@ -70,14 +78,30 @@
                         </div>
                     </div>
 
+                    <div class="grupo-input">
+                        <label for="telefono">Teléfono (opcional)</label>
+                        <div class="input-con-icono">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono">
+                        </div>
+                    </div>
+
+                    <div class="grupo-input">
+                        <label for="carrera">Carrera (opcional)</label>
+                        <div class="input-con-icono">
+                            <i class="fas fa-graduation-cap"></i>
+                            <input type="text" id="carrera" name="carrera" placeholder="Tu carrera universitaria">
+                        </div>
+                    </div>
+
                     <button type="submit" class="boton-login">
-                        <span>Iniciar Sesión</span>
-                        <i class="fas fa-arrow-right"></i>
+                        <span>Crear Cuenta</span>
+                        <i class="fas fa-user-plus"></i>
                     </button>
                 </form>
 
                 <div class="registro-link">
-                    <p>¿No tienes una cuenta? <a href="?page=registro">Regístrate aquí</a></p>
+                    <p>¿Ya tienes una cuenta? <a href="?page=miperfil">Inicia sesión aquí</a></p>
                 </div>
             </div>
         </div>
