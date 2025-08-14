@@ -26,7 +26,7 @@ class AuthController {
             
             if ($user) {
                 $_SESSION['usuario'] = $user;
-                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=home');
+                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=dashboard');
                 exit;
             } else {
                 $error = "Credenciales incorrectas";

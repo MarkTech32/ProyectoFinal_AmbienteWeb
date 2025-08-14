@@ -24,12 +24,21 @@ switch ($page) {
         $auth = new AuthController();
         $auth->login();
         break;
+    
+    case 'dashboard':
+        // Verificar que el usuario esté logueado
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+        include '../app/views/dashboard/dashboard.php';
+        break;
         
     case 'logout':
-        require_once '../app/controllers/AuthController.php';
-        $auth = new AuthController();
-        $auth->logout();
-        break;
+        // Destruir sesión y redirigir
+        session_destroy();
+        header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=home');
+        exit;
         
     case 'registro':
         require_once '../app/controllers/AuthController.php';
