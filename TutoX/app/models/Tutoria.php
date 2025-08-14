@@ -85,5 +85,29 @@ class Tutoria {
         ");
         return $stmt->execute([$id_reserva, $id_cliente]);
     }
+    
+    public function obtenerSolicitudesPorTutor($tutor_id) {
+        $stmt = $this->pdo->prepare("
+            SELECT r.*, t.titulo, t.materia, t.precio, t.modalidad, t.ubicacion,
+                   u.nombre as cliente_nombre, u.email as cliente_email, u.telefono as cliente_telefono
+            FROM reservas_tutorias r 
+            JOIN tutorias t ON r.id_tutoria = t.id 
+            JOIN usuarios u ON r.id_cliente = u.id 
+            WHERE t.usuario_id = ? 
+            ORDER BY r.fecha_solicitud DESC
+        ");
+        $stmt->execute([$tutor_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function actualizarEstadoSolicitud($id_reserva, $nuevo_estado, $tutor_id) {
+        $stmt = $this->pdo->prepare("
+            UPDATE reservas_tutorias r
+            JOIN tutorias t ON r.id_tutoria = t.id
+            SET r.estado = ?
+            WHERE r.id = ? AND t.usuario_id = ?
+        ");
+        return $stmt->execute([$nuevo_estado, $id_reserva, $tutor_id]);
+    }
 }
 ?>

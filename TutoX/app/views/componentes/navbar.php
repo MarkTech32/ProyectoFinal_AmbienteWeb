@@ -8,6 +8,7 @@
                <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=dashboard">Dashboard</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-publicaciones">Mis Publicaciones</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas">Mis Citas</a></li>
+                <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes">Mis Solicitudes</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=perfil">Mi Perfil</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=logout">Cerrar Sesión</a></li>
             <?php else: ?>

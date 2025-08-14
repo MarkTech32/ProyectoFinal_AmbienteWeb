@@ -176,5 +176,57 @@ class TutoriaController {
             exit;
         }
     }
+
+    public function misSolicitudes() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $solicitudes = $this->tutoria->obtenerSolicitudesPorTutor($_SESSION['usuario']['id']);
+        include '../app/views/tutorias/mis-solicitudes.php';
+    }
+
+    public function aceptarSolicitud() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes');
+            exit;
+        }
+
+        if ($this->tutoria->actualizarEstadoSolicitud($id, 'confirmada', $_SESSION['usuario']['id'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&mensaje=aceptada');
+            exit;
+        } else {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&error=1');
+            exit;
+        }
+    }
+
+    public function rechazarSolicitud() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes');
+            exit;
+        }
+
+        if ($this->tutoria->actualizarEstadoSolicitud($id, 'rechazada', $_SESSION['usuario']['id'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&mensaje=rechazada');
+            exit;
+        } else {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&error=1');
+            exit;
+        }
+    }
 }
 ?>

@@ -59,6 +59,24 @@ switch ($page) {
         $controller->cancelarCita();
         break;
         
+    case 'mis-solicitudes':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->misSolicitudes();
+        break;
+        
+    case 'aceptar-solicitud':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->aceptarSolicitud();
+        break;
+        
+    case 'rechazar-solicitud':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->rechazarSolicitud();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;
