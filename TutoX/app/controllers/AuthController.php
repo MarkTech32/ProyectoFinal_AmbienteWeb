@@ -65,5 +65,23 @@ class AuthController {
         
         include '../app/views/miperfil/registro.php';
     }
+    
+    public function perfil() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        // Obtener información del usuario
+        $usuario = $this->usuario->obtenerPorId($_SESSION['usuario']['id']);
+        
+        // Obtener reseñas del usuario
+        $resenas = $this->usuario->obtenerResenasPorTutor($_SESSION['usuario']['id']);
+        
+        // Calcular promedio de calificaciones
+        $promedioCalificacion = $this->usuario->obtenerPromedioCalificacion($_SESSION['usuario']['id']);
+        
+        include '../app/views/miperfil/perfil.php';
+    }
 }
 ?>

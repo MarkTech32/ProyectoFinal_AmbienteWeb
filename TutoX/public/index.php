@@ -120,6 +120,12 @@ switch ($page) {
         $auth->registro();
         break;
         
+    case 'perfil':
+        require_once '../app/controllers/AuthController.php';
+        $auth = new AuthController();
+        $auth->perfil();
+        break;
+        
     case 'faq':
         include '../app/views/faq/index.php';
         break;
