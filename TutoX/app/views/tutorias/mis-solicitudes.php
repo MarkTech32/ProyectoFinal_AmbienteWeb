@@ -37,6 +37,11 @@
                     <i class="fas fa-times-circle"></i>
                     <span>Solicitud rechazada. El estudiante será notificado.</span>
                 </div>
+            <?php elseif ($_GET['mensaje'] == 'completada'): ?>
+                <div class="mensaje-completada">
+                    <i class="fas fa-check-circle"></i>
+                    <span>¡Tutoría completada exitosamente!</span>
+                </div>
             <?php endif; ?>
         <?php endif; ?>
 
@@ -160,6 +165,15 @@
                                    onclick="return confirm('¿Estás seguro de que quieres rechazar esta solicitud?')">
                                     <i class="fas fa-times"></i>
                                     Rechazar
+                                </a>
+                            </div>
+                        <?php elseif ($solicitud['estado'] == 'confirmada'): ?>
+                            <div class="acciones-tutor">
+                                <a href="?page=completar-tutoria&id=<?php echo $solicitud['id']; ?>" 
+                                   class="btn-completar-tutor"
+                                   onclick="return confirm('¿Confirmas que la tutoría fue realizada?')">
+                                    <i class="fas fa-check-circle"></i>
+                                    Completar Tutoría
                                 </a>
                             </div>
                         <?php endif; ?>

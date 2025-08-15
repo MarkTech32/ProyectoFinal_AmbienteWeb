@@ -77,6 +77,18 @@ switch ($page) {
         $controller->rechazarSolicitud();
         break;
         
+    case 'completar-tutoria':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->completarTutoria();
+        break;
+        
+    case 'crear-resena':
+        require_once '../app/controllers/TutoriaController.php';
+        $controller = new TutoriaController();
+        $controller->crearResena();
+        break;
+        
     case 'servicios':
         include '../app/views/servicios/index.php';
         break;

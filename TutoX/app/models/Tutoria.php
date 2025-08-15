@@ -109,5 +109,47 @@ class Tutoria {
         ");
         return $stmt->execute([$nuevo_estado, $id_reserva, $tutor_id]);
     }
+    
+    public function completarReserva($id_reserva, $usuario_id) {
+        $stmt = $this->pdo->prepare("
+            UPDATE reservas_tutorias r
+            LEFT JOIN tutorias t ON r.id_tutoria = t.id
+            SET r.estado = 'completada'
+            WHERE r.id = ? AND (r.id_cliente = ? OR t.usuario_id = ?)
+        ");
+        return $stmt->execute([$id_reserva, $usuario_id, $usuario_id]);
+    }
+    
+    public function obtenerReservaPorId($id_reserva, $id_cliente) {
+        $stmt = $this->pdo->prepare("
+            SELECT r.*, t.titulo, t.materia, 
+                   u.nombre as tutor_nombre, u.email as tutor_email
+            FROM reservas_tutorias r 
+            JOIN tutorias t ON r.id_tutoria = t.id 
+            JOIN usuarios u ON t.usuario_id = u.id 
+            WHERE r.id = ? AND r.id_cliente = ?
+        ");
+        $stmt->execute([$id_reserva, $id_cliente]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function obtenerReservaPorIdGeneral($id_reserva) {
+        $stmt = $this->pdo->prepare("
+            SELECT r.*, t.titulo, t.materia 
+            FROM reservas_tutorias r 
+            JOIN tutorias t ON r.id_tutoria = t.id 
+            WHERE r.id = ?
+        ");
+        $stmt->execute([$id_reserva]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function crearCalificacion($id_reserva, $puntuacion, $comentario) {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO calificaciones (id_reserva, puntuacion, comentario) 
+            VALUES (?, ?, ?)
+        ");
+        return $stmt->execute([$id_reserva, $puntuacion, $comentario]);
+    }
 }
 ?>

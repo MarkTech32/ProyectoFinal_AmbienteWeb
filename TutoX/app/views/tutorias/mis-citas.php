@@ -31,6 +31,16 @@
                 <i class="fas fa-check-circle"></i>
                 <span>¡Cita cancelada exitosamente!</span>
             </div>
+        <?php elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 'completada'): ?>
+            <div class="mensaje-confirmacion">
+                <i class="fas fa-check-circle"></i>
+                <span>¡Tutoría completada exitosamente!</span>
+            </div>
+        <?php elseif (isset($_GET['mensaje']) && $_GET['mensaje'] == 'resena-creada'): ?>
+            <div class="mensaje-resena">
+                <i class="fas fa-star"></i>
+                <span>¡Reseña enviada exitosamente! Gracias por tu opinión.</span>
+            </div>
         <?php endif; ?>
 
         <?php if (isset($_GET['error'])): ?>
@@ -118,6 +128,20 @@
                             </div>
                             
                             <div class="cita-acciones">
+                                <?php if ($cita['estado'] == 'confirmada'): ?>
+                                    <a href="?page=completar-tutoria&id=<?php echo $cita['id']; ?>" 
+                                       class="btn-completar"
+                                       onclick="return confirm('¿Confirmas que la tutoría fue realizada?')">
+                                        <i class="fas fa-check-circle"></i>
+                                        Completar Tutoría
+                                    </a>
+                                <?php elseif ($cita['estado'] == 'completada'): ?>
+                                    <a href="?page=crear-resena&id=<?php echo $cita['id']; ?>" 
+                                       class="btn-resena">
+                                        <i class="fas fa-star"></i>
+                                        Dejar Reseña
+                                    </a>
+                                <?php endif; ?>
                                 <?php if ($cita['estado'] == 'pendiente' || $cita['estado'] == 'confirmada'): ?>
                                     <a href="?page=cancelar-cita&id=<?php echo $cita['id']; ?>" 
                                        class="btn-cancelar-cita"

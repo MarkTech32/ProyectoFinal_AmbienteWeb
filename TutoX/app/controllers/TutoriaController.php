@@ -177,6 +177,42 @@ class TutoriaController {
         }
     }
 
+    public function crearResena() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id_reserva = $_GET['id'] ?? null;
+        if (!$id_reserva) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas');
+            exit;
+        }
+
+        // Verificar que la reserva existe, está completada y pertenece al usuario
+        $reserva = $this->tutoria->obtenerReservaPorId($id_reserva, $_SESSION['usuario']['id']);
+        if (!$reserva || $reserva['estado'] != 'completada') {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas');
+            exit;
+        }
+
+        $error = null;
+
+        if ($_POST) {
+            $puntuacion = $_POST['puntuacion'];
+            $comentario = $_POST['comentario'] ?? '';
+
+            if ($this->tutoria->crearCalificacion($id_reserva, $puntuacion, $comentario)) {
+                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=resena-creada');
+                exit;
+            } else {
+                $error = "Error al crear la reseña";
+            }
+        }
+
+        include '../app/views/tutorias/crear-resena.php';
+    }
+
     public function misSolicitudes() {
         if (!isset($_SESSION['usuario'])) {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
@@ -204,6 +240,35 @@ class TutoriaController {
             exit;
         } else {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&error=1');
+            exit;
+        }
+    }
+
+    public function completarTutoria() {
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil');
+            exit;
+        }
+
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas');
+            exit;
+        }
+
+        if ($this->tutoria->completarReserva($id, $_SESSION['usuario']['id'])) {
+            // Verificar si el usuario es estudiante o tutor para redirigir apropiadamente
+            $reserva = $this->tutoria->obtenerReservaPorIdGeneral($id);
+            if ($reserva && $reserva['id_cliente'] == $_SESSION['usuario']['id']) {
+                // Es el estudiante, redirigir a mis-citas
+                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=completada');
+            } else {
+                // Es el tutor, redirigir a mis-solicitudes
+                header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&mensaje=completada');
+            }
+            exit;
+        } else {
+            header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&error=1');
             exit;
         }
     }
