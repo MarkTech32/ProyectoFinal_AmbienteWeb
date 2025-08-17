@@ -14,7 +14,6 @@
             <?php else: ?>
                 <!-- Usuario no logueado -->
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=tutorias">Tutorías</a></li>
-                <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=servicios">Servicios</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=faq">FAQ</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=miperfil">Iniciar Sesión</a></li>
                 <li><a href="/ProyectoFinal_AmbienteWeb/TutoX/public/?page=registro">Registrarse</a></li>

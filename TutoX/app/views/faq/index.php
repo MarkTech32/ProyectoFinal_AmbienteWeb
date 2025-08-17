@@ -55,18 +55,6 @@ ini_set('display_errors', 1);
                     </div>
                 </div>
 
-                <!-- Pregunta 3 -->
-                <div class="tarjeta-faq">
-                    <div class="categoria-tag">Servicios</div>
-                    <div class="pregunta-header" onclick="toggleFAQ(this)">
-                        <h3>¿Qué tipo de servicios profesionales puedo ofrecer?</h3>
-                        <i class="fas fa-chevron-down icono-toggle"></i>
-                    </div>
-                    <div class="respuesta">
-                        <p>Puedes ofrecer servicios como diseño gráfico, programación, traducción, redacción académica, consultoría, y cualquier habilidad profesional que tengas desarrollada por tus estudios universitarios</p>
-                    </div>
-                </div>
-
                 <!-- Pregunta 4 -->
                 <div class="tarjeta-faq">
                     <div class="categoria-tag">Tutorías</div>

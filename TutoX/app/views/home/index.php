@@ -17,10 +17,6 @@
         <div class="contenido-principal">
             <h1>Bienvenido a TutoX</h1>
             <p>La plataforma que conecta estudiantes universitarios para intercambiar conocimientos, habilidades y servicios académicos</p>
-            <div class="botones-accion">
-                <a href="#" class="boton boton-primario">Buscar Ayuda</a>
-                <a href="#" class="boton boton-secundario">Ofrecer Servicios</a>
-            </div>
         </div>
     </section>
 
@@ -43,11 +39,6 @@
                     <div class="icono-caracteristica">🎨</div>
                     <h3>Diseño y Creatividad</h3>
                     <p>Consigue ayuda con diseño gráfico, presentaciones o proyectos creativos de otros estudiantes talentosos.</p>
-                </div>
-                <div class="tarjeta-caracteristica">
-                    <div class="icono-caracteristica">📊</div>
-                    <h3>Apoyo en Contaduría</h3>
-                    <p>Resuelve dudas contables, financieras o económicas con la ayuda de estudiantes especializados.</p>
                 </div>
             </div>
         </div>

@@ -89,10 +89,6 @@ switch ($page) {
         $controller->crearResena();
         break;
         
-    case 'servicios':
-        include '../app/views/servicios/index.php';
-        break;
-        
     case 'miperfil':
         require_once '../app/controllers/AuthController.php';
         $auth = new AuthController();

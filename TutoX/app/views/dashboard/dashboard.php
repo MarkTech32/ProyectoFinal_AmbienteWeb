@@ -40,19 +40,6 @@
                 </div>
             </div>
 
-            <div class="option-card" onclick="location.href='?page=servicios'">
-                <div class="card-icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Buscar Servicios</h3>
-                    <p>Explora servicios profesionales disponibles</p>
-                </div>
-                <div class="card-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </div>
-
             <div class="option-card" onclick="location.href='?page=mis-publicaciones'">
                 <div class="card-icon">
                     <i class="fas fa-file-alt"></i>
