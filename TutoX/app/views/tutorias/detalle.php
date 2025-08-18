@@ -75,6 +75,47 @@
                     </div>
                 </div>
 
+                <!-- Calificaciones del tutor -->
+                <div class="calificaciones-card">
+                    <h3>Calificaciones</h3>
+                    <?php if ($promedio_calificacion['total'] > 0): ?>
+                        <div class="calificacion-promedio">
+                            <div class="estrellas-container">
+                                <?php 
+                                $promedio = $promedio_calificacion['promedio'];
+                                for ($i = 1; $i <= 5; $i++): 
+                                ?>
+                                    <i class="fas fa-star <?php echo $i <= $promedio ? 'estrella-llena' : 'estrella-vacia'; ?>"></i>
+                                <?php endfor; ?>
+                                <span class="promedio-numero"><?php echo $promedio; ?></span>
+                            </div>
+                            <p class="total-calificaciones">Basado en <?php echo $promedio_calificacion['total']; ?> calificación<?php echo $promedio_calificacion['total'] != 1 ? 'es' : ''; ?></p>
+                        </div>
+
+                        <?php if ($ultima_calificacion): ?>
+                            <div class="ultima-resena">
+                                <h4>Última reseña</h4>
+                                <div class="resena-contenido">
+                                    <div class="resena-estrellas">
+                                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                                            <i class="fas fa-star <?php echo $i <= $ultima_calificacion['puntuacion'] ? 'estrella-llena' : 'estrella-vacia'; ?>"></i>
+                                        <?php endfor; ?>
+                                    </div>
+                                    <?php if ($ultima_calificacion['comentario']): ?>
+                                        <p class="resena-comentario">"<?php echo htmlspecialchars($ultima_calificacion['comentario']); ?>"</p>
+                                    <?php endif; ?>
+                                    <p class="resena-autor">- <?php echo htmlspecialchars($ultima_calificacion['cliente_nombre']); ?></p>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="sin-calificaciones">
+                            <i class="fas fa-star-half-alt"></i>
+                            <p>Sin calificaciones</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
                 <!-- Precio y acciones -->
                 <div class="precio-card">
                     <div class="precio-grande">
@@ -99,7 +140,7 @@
     </div>
 
     <!-- Footer -->
-    <?php include __DIR__ . '/../componentes/footer.php'; ?>
-
+         <?php include __DIR__ . '/../componentes/footer.php'; ?>
+         
 </body>
 </html>

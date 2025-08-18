@@ -18,22 +18,6 @@ CREATE TABLE categorias (
     nombre VARCHAR(50) NOT NULL COMMENT 'Programación, Inglés, Matemáticas'
 );
 
--- Tabla servicios
-CREATE TABLE servicios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    id_categoria INT NOT NULL,
-    titulo VARCHAR(100) NOT NULL COMMENT 'Clases de Java',
-    descripcion TEXT,
-    precio_por_hora DECIMAL(8,2),
-    modalidad VARCHAR(20) COMMENT 'presencial, virtual, ambas',
-    estado VARCHAR(20) DEFAULT 'activo' COMMENT 'activo, inactivo',
-    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE RESTRICT
-);
-
 -- 5. Tabla tutorias
 CREATE TABLE tutorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,21 +32,6 @@ CREATE TABLE tutorias (
     activa BOOLEAN DEFAULT TRUE,
     
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
-);
-
--- Tabla reservas_servicios
-CREATE TABLE reservas_servicios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_servicio INT NOT NULL,
-    id_cliente INT NOT NULL,
-    fecha_solicitada DATE,
-    hora_solicitada VARCHAR(10) COMMENT '14:00',
-    mensaje TEXT COMMENT 'Lo que necesita el cliente',
-    estado VARCHAR(20) DEFAULT 'pendiente' COMMENT 'pendiente, confirmada, rechazada',
-    fecha_solicitud DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (id_servicio) REFERENCES servicios(id) ON DELETE CASCADE,
-    FOREIGN KEY (id_cliente) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
 -- Tabla reservas_tutorias
@@ -88,7 +57,6 @@ CREATE TABLE calificaciones (
     comentario TEXT,
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (id_reserva) REFERENCES reservas_servicios(id) ON DELETE CASCADE,
     CHECK (puntuacion >= 1 AND puntuacion <= 5)
 );
 

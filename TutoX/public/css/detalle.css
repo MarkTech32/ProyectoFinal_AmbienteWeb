@@ -92,6 +92,7 @@ body {
 }
 
 .tutor-card,
+.calificaciones-card,
 .precio-card {
     background: white;
     border-radius: 15px;
@@ -99,7 +100,8 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.tutor-card h3 {
+.tutor-card h3,
+.calificaciones-card h3 {
     font-size: 1.3rem;
     color: #333;
     margin-bottom: 1.5rem;
@@ -132,6 +134,103 @@ body {
 .tutor-datos i {
     color: #667eea;
     margin-right: 0.5rem;
+}
+
+/* Estilos para calificaciones */
+.calificacion-promedio {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.estrellas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.estrellas-container .fas.fa-star {
+    font-size: 20px;
+}
+
+.estrella-llena {
+    color: #fbbf24;
+}
+
+.estrella-vacia {
+    color: #d1d5db;
+}
+
+.promedio-numero {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-left: 10px;
+}
+
+.total-calificaciones {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.ultima-resena {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 15px;
+}
+
+.ultima-resena h4 {
+    margin: 0 0 10px 0;
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.resena-contenido {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.resena-estrellas {
+    margin-bottom: 8px;
+}
+
+.resena-estrellas .fas.fa-star {
+    font-size: 14px;
+    margin-right: 2px;
+}
+
+.resena-comentario {
+    font-style: italic;
+    color: #4b5563;
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.resena-autor {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 5px 0 0 0;
+    text-align: right;
+}
+
+.sin-calificaciones {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
+
+.sin-calificaciones i {
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #d1d5db;
+}
+
+.sin-calificaciones p {
+    margin: 0;
+    font-size: 16px;
 }
 
 /* Precio */
@@ -219,6 +318,7 @@ body {
 
 .detalle-main,
 .tutor-card,
+.calificaciones-card,
 .precio-card {
     animation: aparecerDesdeAbajo 0.6s ease-out;
 }
@@ -229,22 +329,23 @@ body {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    
+
     .detalle-main,
     .tutor-card,
+    .calificaciones-card,
     .precio-card {
         padding: 1.5rem;
     }
-    
+
     .detalle-container {
         padding: 40px 15px;
     }
-    
+
     .tutor-info-detalle {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .precio-valor-grande {
         font-size: 2rem;
     }

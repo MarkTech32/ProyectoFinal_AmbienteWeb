@@ -32,6 +32,10 @@ class TutoriaController {
             exit;
         }
         
+        // Obtener calificaciones del tutor
+        $promedio_calificacion = $this->tutoria->obtenerPromedioCalificacionTutor($tutoria['usuario_id']);
+        $ultima_calificacion = $this->tutoria->obtenerUltimaCalificacionTutor($tutoria['usuario_id']);
+        
         include '../app/views/tutorias/detalle.php';
     }
 

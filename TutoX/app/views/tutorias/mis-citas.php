@@ -16,10 +16,6 @@
     <div class="tutorias-header">
         <h1>Mis Citas Agendadas</h1>
         <p>Gestiona tus tutorías programadas</p>
-        <a href="?page=tutorias" class="btn-crear-tutoria">
-            <i class="fas fa-search"></i>
-            Buscar Más Tutorías
-        </a>
     </div>
 
     <!-- Lista de citas -->

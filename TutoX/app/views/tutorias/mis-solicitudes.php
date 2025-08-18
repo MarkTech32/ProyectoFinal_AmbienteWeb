@@ -16,10 +16,6 @@
     <div class="tutorias-header">
         <h1>Mis Solicitudes</h1>
         <p>Gestiona las solicitudes de citas para tus tutorías</p>
-        <a href="?page=mis-publicaciones" class="btn-crear-tutoria">
-            <i class="fas fa-book"></i>
-            Ver Mis Tutorías
-        </a>
     </div>
 
     <!-- Lista de solicitudes -->
