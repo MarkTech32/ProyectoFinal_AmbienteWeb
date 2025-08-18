@@ -1,9 +1,11 @@
 <?php
 require_once '../config/database.php';
-require_once '../app/models/Usuario.php';  // ESTA ERA LA LÍNEA QUE FALTABA EL /app/
+require_once '../app/models/Usuario.php';
+require_once '../app/models/Calificacion.php';  
 
 class AuthController {
     private $usuario;
+    private $calificacion;  
 
     public function __construct() {
         // Iniciar sesión si no está iniciada
@@ -13,6 +15,7 @@ class AuthController {
         
         global $pdo;
         $this->usuario = new Usuario($pdo);
+        $this->calificacion = new Calificacion($pdo);  
     }
 
     public function login() {
@@ -75,11 +78,11 @@ class AuthController {
         // Obtener información del usuario
         $usuario = $this->usuario->obtenerPorId($_SESSION['usuario']['id']);
         
-        // Obtener reseñas del usuario
-        $resenas = $this->usuario->obtenerResenasPorTutor($_SESSION['usuario']['id']);
+        //Obtener reseñas del usuario usando modelo Calificacion
+        $resenas = $this->calificacion->obtenerResenasPorTutor($_SESSION['usuario']['id']);
         
-        // Calcular promedio de calificaciones
-        $promedioCalificacion = $this->usuario->obtenerPromedioCalificacion($_SESSION['usuario']['id']);
+        //Calcular promedio de calificaciones usando modelo Calificacion
+        $promedioCalificacion = $this->calificacion->obtenerPromedioCalificacion($_SESSION['usuario']['id']);
         
         include '../app/views/miperfil/perfil.php';
     }

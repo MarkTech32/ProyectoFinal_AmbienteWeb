@@ -1,9 +1,13 @@
 <?php
 require_once '../config/database.php';
 require_once '../app/models/Tutoria.php';
+require_once '../app/models/Reserva.php';     // NUEVO: Agregar modelo Reserva
+require_once '../app/models/Calificacion.php'; // NUEVO: Agregar modelo Calificacion
 
 class TutoriaController {
     private $tutoria;
+    private $reserva;      // NUEVO: Instancia del modelo Reserva
+    private $calificacion; // NUEVO: Instancia del modelo Calificacion
 
     public function __construct() {
         if (session_status() == PHP_SESSION_NONE) {
@@ -12,6 +16,8 @@ class TutoriaController {
         
         global $pdo;
         $this->tutoria = new Tutoria($pdo);
+        $this->reserva = new Reserva($pdo);           // NUEVO: Instanciar modelo Reserva
+        $this->calificacion = new Calificacion($pdo); // NUEVO: Instanciar modelo Calificacion
     }
 
     public function index() {
@@ -32,9 +38,9 @@ class TutoriaController {
             exit;
         }
         
-        // Obtener calificaciones del tutor
-        $promedio_calificacion = $this->tutoria->obtenerPromedioCalificacionTutor($tutoria['usuario_id']);
-        $ultima_calificacion = $this->tutoria->obtenerUltimaCalificacionTutor($tutoria['usuario_id']);
+        // CAMBIADO: Obtener calificaciones del tutor usando modelo Calificacion
+        $promedio_calificacion = $this->calificacion->obtenerPromedioCalificacionTutor($tutoria['usuario_id']);
+        $ultima_calificacion = $this->calificacion->obtenerUltimaCalificacionTutor($tutoria['usuario_id']);
         
         include '../app/views/tutorias/detalle.php';
     }
@@ -140,7 +146,8 @@ class TutoriaController {
             $hora_solicitada = $_POST['hora_solicitada'];
             $mensaje_usuario = $_POST['mensaje'] ?? '';
 
-            if ($this->tutoria->crearReserva($id, $_SESSION['usuario']['id'], $fecha_solicitada, $hora_solicitada, $mensaje_usuario)) {
+            // CAMBIADO: Usar modelo Reserva para crear reserva
+            if ($this->reserva->crearReserva($id, $_SESSION['usuario']['id'], $fecha_solicitada, $hora_solicitada, $mensaje_usuario)) {
                 $mensaje = "¡La tutoría se agendó correctamente!";
             } else {
                 $mensaje = "Error al agendar la tutoría";
@@ -156,7 +163,8 @@ class TutoriaController {
             exit;
         }
 
-        $citas = $this->tutoria->obtenerReservasPorUsuario($_SESSION['usuario']['id']);
+        // CAMBIADO: Usar modelo Reserva para obtener reservas por usuario
+        $citas = $this->reserva->obtenerReservasPorUsuario($_SESSION['usuario']['id']);
         include '../app/views/tutorias/mis-citas.php';
     }
 
@@ -172,7 +180,8 @@ class TutoriaController {
             exit;
         }
 
-        if ($this->tutoria->eliminarReserva($id, $_SESSION['usuario']['id'])) {
+        // CAMBIADO: Usar modelo Reserva para eliminar reserva
+        if ($this->reserva->eliminarReserva($id, $_SESSION['usuario']['id'])) {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=cancelada');
             exit;
         } else {
@@ -193,8 +202,8 @@ class TutoriaController {
             exit;
         }
 
-        // Verificar que la reserva existe, está completada y pertenece al usuario
-        $reserva = $this->tutoria->obtenerReservaPorId($id_reserva, $_SESSION['usuario']['id']);
+        // CAMBIADO: Verificar que la reserva existe usando modelo Reserva
+        $reserva = $this->reserva->obtenerReservaPorId($id_reserva, $_SESSION['usuario']['id']);
         if (!$reserva || $reserva['estado'] != 'completada') {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas');
             exit;
@@ -206,7 +215,8 @@ class TutoriaController {
             $puntuacion = $_POST['puntuacion'];
             $comentario = $_POST['comentario'] ?? '';
 
-            if ($this->tutoria->crearCalificacion($id_reserva, $puntuacion, $comentario)) {
+            // CAMBIADO: Usar modelo Calificacion para crear calificación
+            if ($this->calificacion->crearCalificacion($id_reserva, $puntuacion, $comentario)) {
                 header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=resena-creada');
                 exit;
             } else {
@@ -223,7 +233,8 @@ class TutoriaController {
             exit;
         }
 
-        $solicitudes = $this->tutoria->obtenerSolicitudesPorTutor($_SESSION['usuario']['id']);
+        // CAMBIADO: Usar modelo Reserva para obtener solicitudes por tutor
+        $solicitudes = $this->reserva->obtenerSolicitudesPorTutor($_SESSION['usuario']['id']);
         include '../app/views/tutorias/mis-solicitudes.php';
     }
 
@@ -239,7 +250,8 @@ class TutoriaController {
             exit;
         }
 
-        if ($this->tutoria->actualizarEstadoSolicitud($id, 'confirmada', $_SESSION['usuario']['id'])) {
+        // CAMBIADO: Usar modelo Reserva para actualizar estado de solicitud
+        if ($this->reserva->actualizarEstadoSolicitud($id, 'confirmada', $_SESSION['usuario']['id'])) {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&mensaje=aceptada');
             exit;
         } else {
@@ -260,9 +272,10 @@ class TutoriaController {
             exit;
         }
 
-        if ($this->tutoria->completarReserva($id, $_SESSION['usuario']['id'])) {
-            // Verificar si el usuario es estudiante o tutor para redirigir apropiadamente
-            $reserva = $this->tutoria->obtenerReservaPorIdGeneral($id);
+        // CAMBIADO: Usar modelo Reserva para completar reserva
+        if ($this->reserva->completarReserva($id, $_SESSION['usuario']['id'])) {
+            // CAMBIADO: Verificar si el usuario es estudiante o tutor usando modelo Reserva
+            $reserva = $this->reserva->obtenerReservaPorIdGeneral($id);
             if ($reserva && $reserva['id_cliente'] == $_SESSION['usuario']['id']) {
                 // Es el estudiante, redirigir a mis-citas
                 header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-citas&mensaje=completada');
@@ -289,7 +302,8 @@ class TutoriaController {
             exit;
         }
 
-        if ($this->tutoria->actualizarEstadoSolicitud($id, 'rechazada', $_SESSION['usuario']['id'])) {
+        // CAMBIADO: Usar modelo Reserva para actualizar estado de solicitud
+        if ($this->reserva->actualizarEstadoSolicitud($id, 'rechazada', $_SESSION['usuario']['id'])) {
             header('Location: /ProyectoFinal_AmbienteWeb/TutoX/public/?page=mis-solicitudes&mensaje=rechazada');
             exit;
         } else {
